@@ -1,5 +1,6 @@
 from pyspark.sql import SparkSession 
 from pyspark.sql.functions import col, lit, rand
+from pyspark.ml.feature import StringIndexer, IndexToString
 
 
 
@@ -26,8 +27,43 @@ class DataTransformer(object):
     
     
     
-    def convert_column_to_numeric(self):
-        pass
+    def convertColumnToNumeric(self, inputCol="title", outputCol="title_new"):
+        self.inputCol = inputCol
+        self.outputCol = outputCol
+        
+        stringIndexer = StringIndexer(inputCol=self.inputCol,
+                                    outputCol=self.outputCol
+                                    )
+        model = stringIndexer.fit(self.data)
 
+        self.indexed = model.transform(self.data)
+        return self.indexed
+    
+    
+    def splitData(self, trainingSize=0.75, testingSize=0.25, seed=2022):
+        self.trainingSize = trainingSize
+        self.testingSize = testingSize
+        self.seed = seed
+        
+        self.trainData, self.testData = self.indexed.randomSplit(weights=[self.trainingSize,
+                                                                          self.testingSize
+                                                                          ],
+                                                                 seed=self.seed
+                                                                )
+        
+        
+    @property
+    def trainTestDataSize(self):
+        
+        return self.trainData.count(), self.testData.count()
+    
+
+
+
+
+
+stringIndexer = StringIndexer(inputCol="title",
+                              outputCol="title_new"
+                              )
 
 
