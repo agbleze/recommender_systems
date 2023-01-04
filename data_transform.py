@@ -1,6 +1,7 @@
 from pyspark.sql import SparkSession 
 from pyspark.sql.functions import col, lit, rand
 from pyspark.ml.feature import StringIndexer, IndexToString
+import os
 
 
 
@@ -62,8 +63,5 @@ class DataTransformer(object):
 
 
 
-stringIndexer = StringIndexer(inputCol="title",
-                              outputCol="title_new"
-                              )
 
 
