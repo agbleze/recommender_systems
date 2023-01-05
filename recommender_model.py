@@ -40,6 +40,15 @@ class AlternateLeastSquaresModel(object):
                          )
     
     def fit(self, trainData):
+        """Method for fitting ALS model to training data
+
+        Args:
+            trainData (pyspark dataframe): Data for training the model
+
+        Returns:
+            pyspark dataframe: Dataframe with prediction column indicationg predictions on 
+                    the training data
+        """
         if self.trainData is not None:
             try:
                 self.trainData = trainData
