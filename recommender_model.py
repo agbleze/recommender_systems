@@ -10,6 +10,12 @@ from pyspark.sql import SparkSession
 
 
 class AlternateLeastSquaresModel(object):
+    """_summary_
+
+    Args:
+        object (_type_): Class with various methods for fitting, evaluationg,
+        saving and loading recommendation models using the ALS model.
+    """
     def __init__(self, maxIter=10, regParam=0.01, 
                  userCol='userId', itemCol='title_new', 
                  ratingCol='rating', nonnegative=True, 
