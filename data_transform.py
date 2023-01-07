@@ -52,6 +52,15 @@ class DataTransformer(object):
     
     
     def splitData(self, trainingSize=0.75, testingSize=0.25, seed=2022):
+        """ 
+        Method to split the data into training and testing sets
+
+        Args:
+            trainingSize (float, optional): The percentage of the data to be used for training. Defaults to 0.75.
+            
+        Returns:
+            pyspark dataframe: Training dataset 
+        """
         self.trainingSize = trainingSize
         self.testingSize = testingSize
         self.seed = seed
