@@ -29,6 +29,16 @@ class DataTransformer(object):
     
     
     def convertColumnToNumeric(self, inputCol="title", outputCol="title_new"):
+        """Method to convert a string column to a numeric column
+
+        Args:
+            inputCol (str, optional): The column containing the string to be converted. Defaults to "title".
+            outputCol (str, optional): The column name to give to the numeric feature after converting from string
+                    . Defaults to "title_new".
+
+        Returns:
+            pyspark dataframe: pysaprk dataframe containing a column named as that of outputCol provided
+        """
         self.inputCol = inputCol
         self.outputCol = outputCol
         
