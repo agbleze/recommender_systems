@@ -62,6 +62,15 @@ class AlternateLeastSquaresModel(object):
         
         
     def predict(self, testData):
+        """Method for predicting ratings for a given test data
+
+        Args:
+            testData (pyspark dataframe): Data for testing the model
+
+        Returns:
+            pyspark dataframe: Dataframe with prediction column indicationg predictions on 
+                    the testing data
+        """
         if self.testData is None:
             try:
                 self.testData = testData
@@ -77,6 +86,7 @@ class AlternateLeastSquaresModel(object):
                       predictionCol='prediction', 
                      labelCol='rating'
                     ):
+        
         self.metricName = metricName
         self.predictionCol = predictionCol
         self.labelCol = labelCol
