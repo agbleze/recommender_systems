@@ -24,7 +24,7 @@ class DataTransformer(object):
         if useSpark:
             self.spark = SparkSession.builder.appName(sessionName).getOrCreate()
             
-        self.data = self.spark.read.csv(dataDirpath, header=True)
+        self.data = self.spark.read.csv(dataDirpath, header=True, inferSchema=True)
     
     
     
