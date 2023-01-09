@@ -39,7 +39,7 @@ class AlternateLeastSquaresModel(object):
                          coldStartStrategy=self.coldStartStrategy
                          )
     
-    def fit(self, trainData):
+    def fit(self, trainData = None):
         """Method for fitting ALS model to training data
 
         Args:
@@ -61,7 +61,7 @@ class AlternateLeastSquaresModel(object):
         return self.modelFitted
         
         
-    def predict(self, testData):
+    def predict(self, testData = None):
         """Method for predicting ratings for a given test data
 
         Args:
@@ -79,8 +79,8 @@ class AlternateLeastSquaresModel(object):
                         not initialized for the class'
                     )
                 
-        self.predicted_ratings = self.modelFitted.transform(self.testData)
-        return self.predicted_ratings
+        self.predictedRatings = self.modelFitted.transform(self.testData)
+        return self.predictedRatings
     
     def evaluateModel(self, metricName='rmse',
                       predictionCol='prediction', 
@@ -97,7 +97,7 @@ class AlternateLeastSquaresModel(object):
                                             )
         
         #self.metricEvaluated =  self.metricName + 'Evaluated_'
-        self.metricEvaluated = self.evaluator.evaluate(self.predicted_ratings)
+        self.metricEvaluated = self.evaluator.evaluate(self.predictedRatings)
         
         return self.metricEvaluated
     
