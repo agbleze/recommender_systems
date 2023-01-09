@@ -24,7 +24,7 @@ class DataTransformer(object):
         if useSpark:
             self.spark = SparkSession.builder.appName(sessionName).getOrCreate()
             
-        self.data = self.spark.read.csv(dataDirpath)
+        self.data = self.spark.read.csv(dataDirpath, header=True)
     
     
     
@@ -70,6 +70,8 @@ class DataTransformer(object):
                                                                           ],
                                                                  seed=self.seed
                                                                 )
+        
+        return self.trainData, self.testData
         
         
     @property
