@@ -25,6 +25,8 @@ class DataTransformer(object):
             self.spark = SparkSession.builder.appName(sessionName).getOrCreate()
             
         self.data = self.spark.read.csv(dataDirpath, header=True, inferSchema=True)
+        
+        #self.stringIndexerModel = None
     
     
     
@@ -45,10 +47,13 @@ class DataTransformer(object):
         stringIndexer = StringIndexer(inputCol=self.inputCol,
                                     outputCol=self.outputCol
                                     )
-        model = stringIndexer.fit(self.data)
+        self.stringIndexerModel = stringIndexer.fit(self.data)
 
-        self.indexed = model.transform(self.data)
+        self.indexed = self.stringIndexerModel.transform(self.data)
         return self.indexed
+    
+    def getStringIndexer(self):
+        return self.stringIndexerModel
     
     
     def splitData(self, trainingSize=0.75, testingSize=0.25, seed=2022):
