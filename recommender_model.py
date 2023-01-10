@@ -1,4 +1,4 @@
-from pyspark.ml.recommendation import ALS
+from pyspark.ml.recommendation import ALS, ALSModel
 from pyspark.ml.evaluation import RegressionEvaluator
 import joblib
 from pyspark.ml.feature import StringIndexer, IndexToString
@@ -49,7 +49,7 @@ class AlternateLeastSquaresModel(object):
             pyspark dataframe: Dataframe with prediction column indicationg predictions on 
                     the training data
         """
-        if self.trainData is not None:
+        if trainData is not None:
             try:
                 self.trainData = trainData
             except:
@@ -71,7 +71,7 @@ class AlternateLeastSquaresModel(object):
             pyspark dataframe: Dataframe with prediction column indicationg predictions on 
                     the testing data
         """
-        if self.testData is None:
+        if testData is not None:
             try:
                 self.testData = testData
             except:
@@ -101,18 +101,18 @@ class AlternateLeastSquaresModel(object):
         
         return self.metricEvaluated
     
-    def saveModel(self, modelStoreFolderName: str, modelName='model.model'):
+    def saveModel(self, modelStoreFolderName: str, modelName='model.h5'):
         modelFile = get_file_path(folder_name=modelStoreFolderName, file_name=modelName)
         #modelFile = os.path.join(os.path.dirname(__file__), modelStoreFolderName, modelName)
-        joblib.dump(value=self.model, filename=modelFile)    
+        #joblib.dump(value=self.model, filename=modelFile, compress=3)           
+        self.modelFitted.write().overwrite().save(path=modelFile)
         print('model saved successfully')
-        
     
-    @staticmethod    
-    def getModel(self, modelStoreFolderName: str, modelName='model.model'):
+    @classmethod    
+    def getModel(self, modelStoreFolderName: str, modelName='model.h5'):
         modelFile = get_file_path(folder_name=modelStoreFolderName, file_name=modelName)
         #modelFile = os.path.join(os.path.dirname(__file__), modelStoreFolderName, modelName)
-        self.loadedModel = joblib.load(filename=modelFile)
+        self.loadedModel = ALSModel.load(path=modelFile)
         print('Model loaded successfully')
         return self.loadedModel
    
