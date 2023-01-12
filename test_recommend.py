@@ -25,10 +25,28 @@ def testing_convertColumnToNumeric():
 
 
 
+def test_splitData():
+    pass
+
+
+
+def test_get_model():
+    pass
+
+
+
+def test_fit_model():
+    pass
+
+
+def test_predict_ratings():
+    pass
 
 
 
 
+    
+    
 
 
 
