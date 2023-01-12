@@ -44,7 +44,8 @@ def test_predict_ratings():
 
 
 
-
+def test_evaluate_model():
+    pass
     
     
 
