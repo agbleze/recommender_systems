@@ -1,4 +1,5 @@
 from data_transform import DataTransformer
+from recommender_model import AlternateLeastSquaresModel
 import pytest
 
 
