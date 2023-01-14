@@ -7,6 +7,8 @@ from helper import get_file_path
 data_file_path = get_file_path(folder_name='data_store', file_name='movie_ratings_df.csv')
 
 
+dt = DataTransformer(dataDirpath=data_file_path, sessionName='recommender')
+
 
 def test_numeric_title_column_available():
     pass
