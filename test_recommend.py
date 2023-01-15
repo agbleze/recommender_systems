@@ -9,8 +9,14 @@ data_file_path = get_file_path(folder_name='data_store', file_name='movie_rating
 
 dt = DataTransformer(dataDirpath=data_file_path, sessionName='recommender')
 
+data = dt.data
 
-def test_numeric_title_column_available():
+def test_title_column_is_availaible():
+    pass
+
+
+
+def test_title_column_is_numeric():
     pass
 
 
