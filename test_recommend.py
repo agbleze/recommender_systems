@@ -12,7 +12,7 @@ dt = DataTransformer(dataDirpath=data_file_path, sessionName='recommender')
 data = dt.data
 
 def test_title_column_is_availaible():
-    pass
+    assert 'title' in data.columns
 
 
 
