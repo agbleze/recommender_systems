@@ -13,6 +13,22 @@ dt = DataTransformer(dataDirpath=data_file_path, sessionName='recommender')
 data = dt.data
 
 
+@pytest.fixture()
+def create_model_instance():
+    model = AlternateLeastSquaresModel()
+    return model
+
+@pytest.fixture()
+def create_train_test_data():
+    pass
+
+
+@pytest.fixture()
+def create_data_transformer_object():
+    dt = DataTransformer(dataDirpath=data_file_path, sessionName='recommender')
+    return dt
+
+
 
 
 def test_title_column_is_availaible():
