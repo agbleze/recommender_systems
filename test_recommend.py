@@ -33,6 +33,12 @@ def ALS_model(train_test_data):
     return model
 
 
+# @pytest.fixture()
+# def ALS_model_fit(ALS_model):
+#     return ALS_model.fit()
+
+
+
 @pytest.fixture()
 def prediction(ALS_model):
     ALS_model.fit()
@@ -75,7 +81,7 @@ def test_get_model(ALS_model):
     assert isinstance(loaded_model, pyspark.ml.recommendation.ALSModel)
 
 
-def test_predict_ratings():
+def test_recommend_items():
     pass
 
 
