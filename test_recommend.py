@@ -33,12 +33,6 @@ def ALS_model(train_test_data):
     return model
 
 
-# @pytest.fixture()
-# def ALS_model_fit(ALS_model):
-#     return ALS_model.fit()
-
-
-
 @pytest.fixture()
 def prediction(ALS_model):
     ALS_model.fit()
