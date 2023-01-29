@@ -170,6 +170,49 @@ final_recommendations = movie_title.transform(recommendations)
 final_recommendations.show(10, False)
 
 
+#%%
+import os
 
 
+cwd = os.getcwd()
+rec_model.save(path=cwd+'/final_model')
+
+#%%
+
+loadedModel = rec.load(path=cwd+'/final_model')
+
+#%%
+
+#ALS().load(path=cwd+'/final_model')
+
+rec_model.write().overwrite().save(path=cwd+'/rec_model.h5')
+
+
+#%%
+
+loadModel = rec_model.load('rec_model.h5')
+
+#%%
+from pyspark.ml.recommendation import ALSModel
+
+#%%
+
+realLoadedModel = ALSModel.load(path=cwd+'/rec_model.h5')
+
+
+
+#%%
+realLoadedModel.transform(test).show()
+
+
+
+
+#ALS.load(path=cwd+'/rec_model.h5')
+
+
+# %%
+import os
+
+
+os.getcwd()
 # %%
