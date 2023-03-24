@@ -86,6 +86,22 @@ def test_evaluate_model():
     
 
 
+userRecommendedItems = recommendItem(userId= 100, 
+                                     modelStoreFolderName='model_store',
+                                    modelName='model.h5',
+                                    numberOfItems=5, 
+                                    getModel=AlternateLeastSquaresModel.getModel,
+                                    readIndexedDataFromFile=False,
+                                    indexedDataObject=indexData,
+                                    stringIndexDir=get_file_path(folder_name='model_store', 
+                                                                file_name='string-indexer-model'
+                                                                )
+                                    )
+
+
+#%%
+userRecommendedItems.select('title').show()
+
 
 
 
