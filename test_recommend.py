@@ -27,6 +27,11 @@ def train_test_data(data_transformer):
 
 
 @pytest.fixture()
+def get_index_data(data_transformer):
+    indexData = data_transformer.convertColumnToNumeric()
+    return indexData
+
+@pytest.fixture()
 def ALS_model(train_test_data):
     train_data, test_data = train_test_data
     model = AlternateLeastSquaresModel(trainData=train_data, testData=test_data)
@@ -42,11 +47,6 @@ def prediction(ALS_model):
 
 def test_title_column_is_availaible():
     assert 'title' in data.columns
-
-
-
-# def test_title_column_is_numeric():
-#     pass
 
 
 def test_length_data_split(train_test_data):
@@ -75,39 +75,28 @@ def test_get_model(ALS_model):
     assert isinstance(loaded_model, pyspark.ml.recommendation.ALSModel)
 
 
-def test_recommend_items():
-    pass
-
-
-
-def test_evaluate_model():
-    pass
-    
-    
-
-
-userRecommendedItems = recommendItem(userId= 100, 
-                                     modelStoreFolderName='model_store',
+def test_recommend_items(get_index_data):
+    userRecommendedItems = recommendItem(userId= 100, modelStoreFolderName='model_store',
                                     modelName='model.h5',
                                     numberOfItems=5, 
                                     getModel=AlternateLeastSquaresModel.getModel,
                                     readIndexedDataFromFile=False,
-                                    indexedDataObject=indexData,
+                                    indexedDataObject=get_index_data,
                                     stringIndexDir=get_file_path(folder_name='model_store', 
                                                                 file_name='string-indexer-model'
                                                                 )
                                     )
-
-
-#%%
-userRecommendedItems.select('title').show()
-
+    assert userRecommendedItems.select('title').count() == 5
+    
 
 
 
-
-
-
+def test_evaluate_model(ALS_model):
+    ALS_model.fit()
+    ALS_model.predict()
+    res = ALS_model.evaluateModel()
+    assert isinstance(res, float)
+    assert res > 1.0
 
 
 
