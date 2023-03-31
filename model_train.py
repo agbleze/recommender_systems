@@ -111,9 +111,10 @@ userRecommendedItems = recommendItem(userId= 100, modelStoreFolderName='model_st
 userRecommendedItems.select('title').show()
 
 
+#%%
 
+type(userRecommendedItems.select('title'))
 
-
-
-
+# %%
+userRecommendedItems.select('title').count()
 # %%
